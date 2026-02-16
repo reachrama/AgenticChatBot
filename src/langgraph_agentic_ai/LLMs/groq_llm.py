@@ -8,6 +8,7 @@ class GroqLLM:
         self.model_name = user_controls.get("selected_groq_model")
         self.api_key = user_controls.get("GROQ_API_KEY")
         self.client = None  
+        st.write(f"GroqLLM initialized with model: {self.model_name}")  # Debugging line to check model name
 
 
     def get_llm_model(self):
@@ -17,6 +18,7 @@ class GroqLLM:
         
         try:
             self.client = ChatGroq(api_key=self.api_key, model=self.model_name)            
+            st.write(f"Groq model '{self.client}' initialized successfully.")  # Debugging line to confirm initialization
         except Exception as e:
             st.error(f"Error initializing Groq model: {e}")
             return ValueError(f"Error initializing Groq model: {e}")
