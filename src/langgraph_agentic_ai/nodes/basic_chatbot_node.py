@@ -17,4 +17,4 @@ class BasicChatbotNode:
         In this basic implementation, it simply echoes the input.
         """       
         st.write("BasicChatbotNode processing state:", state)  # Debugging line to check input state
-        return {"message": self.model.invoke(state["message"])}
+        return {"messages": self.model.invoke(state["messages"])}

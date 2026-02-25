@@ -15,7 +15,8 @@ class LoadStreamlitUI:
         with st.sidebar:
             #Get options from Config
             llm_options = self.config.get_llm_options()
-            usecase_options = self.config.get_usecase_options()            
+            usecase_options = self.config.get_usecase_options()          
+         
 
             # LLM Selection
             self.user_controls["selected_llm"] = st.selectbox("Select LLM", llm_options)
@@ -29,6 +30,13 @@ class LoadStreamlitUI:
         
             # Use Case Selection
             self.user_controls["selected_usecase"] = st.selectbox("Select Use Case", usecase_options)
+            if self.user_controls["selected_usecase"] == "Chatbot with Web":
+                os.environ["TAVILY_API_KEY"] = self.user_controls["TAVILY_API_KEY"] = st.session_state["TAVILY_API_KEY"] = st.text_input("Enter TAVILY API Key", type="password")
+
+                # Validate API Key
+                if not self.user_controls["TAVILY_API_KEY"]:
+                    st.warning("Please enter your TAVILY API Key to use the Chatbot with Web use case.")    
+               
             
         return self.user_controls
     
